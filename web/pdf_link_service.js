@@ -431,7 +431,16 @@ class PDFLinkService {
       if (params.has("nameddest")) {
         this.goToDestination(params.get("nameddest"));
       }
-
+      //! use scrollmode arg
+      if (params.has("scrollmode")) {
+        this.pdfViewer.scrollMode =  params.get("scrollmode") | 0;
+      }
+      if (params.has("spreadmode")) {
+        this.pdfViewer.spreadMode =  params.get("spreadmode") | 0;
+      }
+      if (params.has("rotation")) {
+        this.pdfViewer.pagesRotation =  params.get("rotation") | 0;
+      }
       if (typeof PDFJSDev === "undefined" || !PDFJSDev.test("MOZCENTRAL")) {
         return;
       }

@@ -28,7 +28,8 @@
 
   --toolbar-icon-opacity: 0.7;
   --doorhanger-icon-opacity: 0.9;
-  --editor-toolbar-base-offset: 105px;
+  --editor-toolbar-base-offset:77px;
+
 
   --main-color: rgb(12 12 13);
   --body-bg-color: rgb(212 212 215);
@@ -96,7 +97,7 @@
   /*#if GENERIC*/
   --toolbarButton-openFile-icon: url(images/toolbarButton-openFile.svg);
   /*#endif*/
-  --toolbarButton-download-icon: url(images/toolbarButton-download.svg);
+  --toolbarButton-download-icon:url(images/gv-toolbarButton-download.svg);
   --toolbarButton-bookmark-icon: url(images/toolbarButton-bookmark.svg);
   --toolbarButton-viewThumbnail-icon: url(images/toolbarButton-viewThumbnail.svg);
   --toolbarButton-viewOutline-icon: url(images/toolbarButton-viewOutline.svg);
@@ -118,7 +119,8 @@
   --secondaryToolbarButton-scrollWrapped-icon: url(images/secondaryToolbarButton-scrollWrapped.svg);
   --secondaryToolbarButton-spreadNone-icon: url(images/secondaryToolbarButton-spreadNone.svg);
   --secondaryToolbarButton-spreadOdd-icon: url(images/secondaryToolbarButton-spreadOdd.svg);
-  --secondaryToolbarButton-spreadEven-icon: url(images/secondaryToolbarButton-spreadEven.svg);
+  /*! change icon */
+  --secondaryToolbarButton-spreadEven-icon: url(images/3pages.svg);
   --secondaryToolbarButton-documentProperties-icon: url(images/secondaryToolbarButton-documentProperties.svg);
   --editorParams-stampAddImage-icon: url(images/toolbarButton-zoomIn.svg);
 }
@@ -1516,8 +1518,50 @@ dialog :link {
   }
 }
 
-@media all and (max-width: 560px) {
-  #scaleSelectContainer {
-    display: none;
+@media all and (max-width: 430px){
+  #scaleSelectContainer{
+    display:none;
   }
+}
+
+.secondaryToolbar {
+  margin-left: auto;
+  margin-right: auto;
+  right: 0px;
+  left: 0px;
+  width: fit-content;
+}
+
+
+#secondaryToolbarToggle::before{
+  -webkit-mask-image:var(--toolbarButton-secondaryToolbarToggle-icon);
+          mask-image:var(--toolbarButton-secondaryToolbarToggle-icon);
+  transform:rotate(90deg) scaleX(var(--dir-factor));
+}
+
+#secondaryToolbarToggle.toggled::before{
+  transform:rotate(-90deg) scaleX(var(--dir-factor));
+}
+
+#secondaryToolbar::before {
+  display: none !important;
+}
+
+#secondaryToolbar::after {
+  display: none !important;
+}
+
+:is(#nav-back)::before{
+  -webkit-mask-image:url(images/back.svg);
+          mask-image:url(images/back.svg);
+}
+
+:is(#nav-home)::before{
+  -webkit-mask-image:url(images/home.svg);
+          mask-image:url(images/home.svg);
+}
+
+:is(#nav-next)::before{
+  -webkit-mask-image:url(images/forward.svg);
+          mask-image:url(images/forward.svg);
 }

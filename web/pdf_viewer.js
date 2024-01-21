@@ -67,6 +67,7 @@ import { NullL10n } from "web-l10n_utils";
 import { PDFPageView } from "./pdf_page_view.js";
 import { PDFRenderingQueue } from "./pdf_rendering_queue.js";
 import { SimpleLinkService } from "./pdf_link_service.js";
+import { AppOptions } from "./app_options.js";
 
 const DEFAULT_CACHE_SIZE = 10;
 
@@ -1121,14 +1122,23 @@ class PDFViewer {
       if (parity === -1) {
         // PresentationMode is active, with `SpreadMode.NONE` set.
         pageIndexSet.add(pageNumber - 1);
-      } else if (pageNumber % 2 !== parity) {
-        // Left-hand side page.
-        pageIndexSet.add(pageNumber - 1);
-        pageIndexSet.add(pageNumber);
+        //! repurpose SpreadMode.EVEN to 3 pages
+      } else if (this._spreadMode === SpreadMode.ODD) {
+
+        if (pageNumber % 2 !== parity) {
+          // Left-hand side page.
+          pageIndexSet.add(pageNumber - 1);
+          pageIndexSet.add(pageNumber);
+        } else {
+          // Right-hand side page.
+          pageIndexSet.add(pageNumber - 2);
+          pageIndexSet.add(pageNumber - 1);
+        }
       } else {
-        // Right-hand side page.
-        pageIndexSet.add(pageNumber - 2);
-        pageIndexSet.add(pageNumber - 1);
+        //! SpreadMode.EVEN
+        pageIndexSet.add(0);
+        pageIndexSet.add(1);
+        pageIndexSet.add(2);
       }
 
       // Finally, append the new pages to the viewer and apply the spreadMode.
@@ -1563,9 +1573,32 @@ class PDFViewer {
     const intLeft = Math.round(topLeft[0]);
     const intTop = Math.round(topLeft[1]);
 
-    let pdfOpenParams = `#page=${pageNumber}`;
+    //! génération lien de la vue
+    const scrollMode = this.scrollMode;
+    const spreadMode = this.spreadMode;
+    const rotation = this.pagesRotation;
+
+    let pdfOpenParams = `#page=1`;
     if (!this.isInPresentationMode) {
-      pdfOpenParams += `&zoom=${normalizedScaleValue},${intLeft},${intTop}`;
+      let top = intTop;
+      let left = intLeft;
+      if (scrollMode == ScrollMode.HORIZONTAL) {
+        left = 0;
+      } else if (scrollMode == ScrollMode.Vertical || scrollMode == ScrollMode.WRAPPED) {
+        top = 9999;
+      }
+      pdfOpenParams += `&zoom=${normalizedScaleValue},${left},${top}`;
+
+      if (scrollMode != AppOptions.get("scrollModeOnLoad")) {
+        pdfOpenParams += `&scrollmode=${scrollMode}`;
+      }
+      if (spreadMode != AppOptions.get("spreadModeOnLoad") && scrollMode != ScrollMode.HORIZONTAL) {
+        pdfOpenParams += `&spreadmode=${spreadMode}`;
+      }
+      if (rotation != 0) {
+        pdfOpenParams += `&rotation=${rotation}`;
+      }
+      console.debug(pdfOpenParams);
     }
 
     this._location = {
@@ -1574,8 +1607,9 @@ class PDFViewer {
       top: intTop,
       left: intLeft,
       rotation: this._pagesRotation,
-      pdfOpenParams,
+      pdfOpenParams
     };
+    console.debug(this._location);
   }
 
   update() {

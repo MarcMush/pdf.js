@@ -100,9 +100,10 @@ const defaultOptions = {
     value: 2,
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE,
   },
+  //! start with handtool
   cursorToolOnLoad: {
     /** @type {number} */
-    value: 0,
+    value: 1,
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE,
   },
   defaultZoomDelay: {
@@ -110,9 +111,10 @@ const defaultOptions = {
     value: 400,
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE,
   },
+  //!
   defaultZoomValue: {
     /** @type {string} */
-    value: "",
+    value: "page-fit",
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE,
   },
   disableHistory: {
@@ -216,9 +218,10 @@ const defaultOptions = {
     value: -1,
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE,
   },
+  //!
   scrollModeOnLoad: {
     /** @type {number} */
-    value: -1,
+    value: 1,
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE,
   },
   spreadModeOnLoad: {

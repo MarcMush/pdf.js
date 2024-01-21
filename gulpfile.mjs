@@ -2096,15 +2096,16 @@ gulp.task("clean", function (done) {
 });
 
 gulp.task("importl10n", async function () {
-  const { downloadL10n } = await import("./external/importL10n/locales.mjs");
+  //! do not download locales
+  // const { downloadL10n } = await import("./external/importL10n/locales.mjs");
 
-  console.log();
-  console.log("### Importing translations from mozilla-central");
+  // console.log();
+  // console.log("### Importing translations from mozilla-central");
 
-  if (!fs.existsSync(L10N_DIR)) {
-    fs.mkdirSync(L10N_DIR);
-  }
-  await downloadL10n(L10N_DIR);
+  // if (!fs.existsSync(L10N_DIR)) {
+  //   fs.mkdirSync(L10N_DIR);
+  // }
+  // await downloadL10n(L10N_DIR);
 });
 
 function ghPagesPrepare() {
