@@ -1580,19 +1580,12 @@ class PDFViewer {
 
     let pdfOpenParams = `#page=1`;
     if (!this.isInPresentationMode) {
-      let top = intTop;
-      let left = intLeft;
-      if (scrollMode == ScrollMode.HORIZONTAL) {
-        left = 0;
-      } else if (scrollMode == ScrollMode.Vertical || scrollMode == ScrollMode.WRAPPED) {
-        top = 9999;
-      }
-      pdfOpenParams += `&zoom=${normalizedScaleValue},${left},${top}`;
+      pdfOpenParams += `&zoom=${normalizedScaleValue},${intLeft},${intTop}`;
 
       if (scrollMode != AppOptions.get("scrollModeOnLoad")) {
         pdfOpenParams += `&scrollmode=${scrollMode}`;
       }
-      if (spreadMode != AppOptions.get("spreadModeOnLoad") && scrollMode != ScrollMode.HORIZONTAL) {
+      if (spreadMode != AppOptions.get("spreadModeOnLoad")) {
         pdfOpenParams += `&spreadmode=${spreadMode}`;
       }
       if (rotation != 0) {

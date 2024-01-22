@@ -1844,12 +1844,6 @@ const PDFViewerApplication = {
     this.pdfViewer.pagesRotation += delta;
     // Note that the thumbnail viewer is updated, and rendering is triggered,
     // in the 'rotationchanging' event handler.
-    if (PDFViewerApplication.appConfig.secondaryToolbar) {
-      //! update lien vue courante
-      const href = PDFViewerApplication.pdfLinkService.getAnchorUrl(location.pdfOpenParams);
-      PDFViewerApplication.appConfig.secondaryToolbar.viewBookmarkButton.href = href;
-      console.debug("update link: ", location.pdfOpenParams, href);
-    }
   },
 
   requestPresentationMode() {
@@ -2359,11 +2353,6 @@ function webViewerScrollModeChanged(evt) {
     PDFViewerApplication.store?.set("scrollMode", evt.mode).catch(() => {
       // Unable to write to storage.
     });
-    if (PDFViewerApplication.appConfig.secondaryToolbar) {
-      //! update lien vue courante
-      const href = PDFViewerApplication.pdfLinkService.getAnchorUrl(location.pdfOpenParams);
-      PDFViewerApplication.appConfig.secondaryToolbar.viewBookmarkButton.href = href;
-    }
   }
 }
 
@@ -2376,11 +2365,6 @@ function webViewerSpreadModeChanged(evt) {
     PDFViewerApplication.store?.set("spreadMode", evt.mode).catch(() => {
       // Unable to write to storage.
     });
-    if (PDFViewerApplication.appConfig.secondaryToolbar) {
-      //! update lien vue courante
-      const href = PDFViewerApplication.pdfLinkService.getAnchorUrl(location.pdfOpenParams);
-      PDFViewerApplication.appConfig.secondaryToolbar.viewBookmarkButton.href = href;
-    }
   }
 }
 

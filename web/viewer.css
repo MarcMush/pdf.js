@@ -1551,17 +1551,17 @@ dialog :link {
   display: none !important;
 }
 
-:is(#nav-back)::before{
+:is(#navBack)::before{
   -webkit-mask-image:url(images/back.svg);
           mask-image:url(images/back.svg);
 }
 
-:is(#nav-home)::before{
+:is(#navHome)::before{
   -webkit-mask-image:url(images/home.svg);
           mask-image:url(images/home.svg);
 }
 
-:is(#nav-next)::before{
+:is(#navNext)::before{
   -webkit-mask-image:url(images/forward.svg);
           mask-image:url(images/forward.svg);
 }

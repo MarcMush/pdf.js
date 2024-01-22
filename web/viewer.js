@@ -42,6 +42,10 @@ function getViewerConfiguration() {
     mainContainer: document.getElementById("viewerContainer"),
     viewerContainer: document.getElementById("viewer"),
     toolbar: {
+      
+      navBack: document.getElementById("navBack"),
+      navHome: document.getElementById("navHome"),
+      navNext: document.getElementById("navNext"),
       container: document.getElementById("toolbarViewer"),
       numPages: document.getElementById("numPages"),
       pageNumber: document.getElementById("pageNumber"),
@@ -223,6 +227,15 @@ if (
 } else {
   document.addEventListener("DOMContentLoaded", webViewerLoad, true);
 }
+
+function updateNavButtons() {
+  const navHome = document.getElementById("navHome");
+  navHome.href = '.' + window.location.hash;
+  console.debug(navHome.href);
+}
+
+document.addEventListener("DOMContentLoaded", updateNavButtons)
+window.addEventListener("hashchange", updateNavButtons)
 
 export {
   PDFViewerApplication,
