@@ -1573,7 +1573,7 @@ class PDFViewer {
     const intLeft = Math.round(topLeft[0]);
     const intTop = Math.round(topLeft[1]);
 
-    //! génération lien de la vue
+    //! génération lien de vue courante
     const scrollMode = this.scrollMode;
     const spreadMode = this.spreadMode;
     const rotation = this.pagesRotation;

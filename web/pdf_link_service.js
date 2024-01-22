@@ -425,12 +425,7 @@ class PDFLinkService {
           source: this,
           mode: params.get("pagemode"),
         });
-      }
-      // Ensure that this parameter is *always* handled last, in order to
-      // guarantee that it won't be overridden (e.g. by the "page" parameter).
-      if (params.has("nameddest")) {
-        this.goToDestination(params.get("nameddest"));
-      }
+      }     
       //! use scrollmode arg
       if (params.has("scrollmode")) {
         this.pdfViewer.scrollMode =  params.get("scrollmode") | 0;
@@ -441,6 +436,12 @@ class PDFLinkService {
       if (params.has("rotation")) {
         this.pdfViewer.pagesRotation =  params.get("rotation") | 0;
       }
+      // Ensure that this parameter is *always* handled last, in order to
+      // guarantee that it won't be overridden (e.g. by the "page" parameter).
+      if (params.has("nameddest")) {
+        this.goToDestination(params.get("nameddest"));
+      }
+
       if (typeof PDFJSDev === "undefined" || !PDFJSDev.test("MOZCENTRAL")) {
         return;
       }
